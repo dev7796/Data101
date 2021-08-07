@@ -192,11 +192,11 @@ Students with accuracy over 60% were considered passed for this prediction chall
 </div>
 
   - Jeremy performed exceptionally well in this prediction challenge.
-  - His approach was a iterative learning process, where at each step after performing analysis he tried to decrease the error more and more.
+  - His approach was a iterative learning process, where at each step after performing analysis he tried to decrease the error more and more. 
   - He started with a very basic model, of using just the score attribute with a hard threshold for pass or fail grade based on the score value. 
   - After this, to increase accuracy, he analysed the data more found which attributes effect the prediction of the data, and which are not really useful
   - After finding these highly effective attributes, he wrote concrete set of attributs that can be used to assign the grade. Most of them were dependent on 2-3 attributes like Major-Senioriy-Score, Major-Score, or Major-Questions-Score,etc. 
-  - This gave him a much better accuracy value for prediction. 
+  - Jeremy’s model has achieved accuracy of nearly 87% - beating the perfect prediction model by 4 percentage points. The reasons for these unexpected results were discussed earlier in this section. 
 
 
 2. *Rohit  Manjunath*    <button class="btn btn-primary" data-toggle="collapse" data-target="#pred12">Rohit's PPT</button>
@@ -208,7 +208,7 @@ Students with accuracy over 60% were considered passed for this prediction chall
   - In Rohit's approach, instead of finding the minimum global threshold of pass or fail based on score, he found the threshold for the maximum score, above which every student passed the class.
   - He then analysed the data based on the Majors first and then found interval threshold for each Majors scores.
   - For some Majors, to increase accuracy, he further explored other attributes in detail to find which effects the final grade.
-  - Rohit obtained accuracy of almost 85%.
+  - Rohit obtained accuracy of almost 85%, beating the accuracy of perfect model by 2%.
   
 
 
@@ -216,25 +216,17 @@ Students with accuracy over 60% were considered passed for this prediction chall
 
 ## Prediction Challenge 2.
 
-In Prediction Challenge 2, we introduced the use of Decision Tree algorithm for prediction model building, to complete the same task as we saw in the Prediction Challenge 1.
 
-This was intended to see the first learning model in action, and also to see the ease in which the process of prediction can be completed using such prediction model against the trivial data analysis techniques.
+Both the training and testing data sets  for this prediction challenge were the same as those in the prediction challenge 1. Students were simply allowed to use the rpart  library  in R to build their prediction models. This provided the opportunity to assess the value of pre-packaged libraries such as rpart as opposed to manual coding the prediction models.  
 
-The datasets for this prediction challenge were the same as those in the prediction challenge 1.
+With rpart() doing most work of prediction in this task, the students were also asked to provide validation for their models prediction power/accuracy. This involved use of cross-validation techniques, which were provided in the form of a single function call,see 6.7.
 
-Since, the task in the prediction challenge was to predict a categorical value(*Grade* value) the learning algorithm allowed to be used in this task was the Decision Tree algorithm based on the CART model. Read more about how to use decision tree's in section \@ref(decisiontree) .
+In general, rpart() offered great help to the vast majority of students. In fact around 70% of all students achieved identical accuracy on the testing data set, which was a few points shy of the ideal 83%. This was the case because  they used the same prediction model - a simple default rpart model. Interestingly rpart()  accuracy did not  beat the few top prediction model solutions for challenge 1. These were coded manually without using any R libraries. In fact nobody has beat the top accuracy achieved for the prediction challenge 1 by Jeremy Prasad!  However he spent a lot of time building his prediction model from the ground. And got away with some overfitting for sure.
 
-To implement this algorithm, students were allowed to use the RPART package \@ref(rpart)
-
-With rpart() doing most work of prediction in this task, the students were also asked to provide validation for their models prediction power/accuracy. This involved use of cross-validation techinques, which for the ease of this course level was provided in a custom function, see \@ref(crossvalidation).
+To perform this challenge yourself please visit the kaggle site of this prediction challenge. Link to Kaggle Site: Prediction Challenge 2
 
 <!-- To perform this challenge yourself please visit the kaggle site of this prediction challenge. Link to Kaggle Site: [Prediction Challenge 2](https://www.kaggle.com/t/607a8221c6a647048f88ffa380ad1e4b){target="_blank"} -->
 
----
-
-### How the data was generated to Challenge 2
-
-As we saw that the prediction task and the datasets in challenge 2 are similar to that of the challenge 1. Thus the data analysis of the challenge 1 would applicable in this case too.
 
 <!-- But here we can use the rpart() function of creating the decision tree and predicting on the testing dataset. -->
 
@@ -314,15 +306,11 @@ Since rpart() is a very powerful function to find patterns with higher accuracy,
 
 ## Prediction Challenge 3.
 
-After studying prediction of categorical data in the previous 2 prediction challenges, in prediction challenge 3, the task was to predict *Earnings* a numerical variable, using any ML algorithm. 
-
-*Earnings* variable is part of the Earnings dataset which has details about a persons connections, GPA, Major,etc, and using these attributes, the students had to predict the numerical value of earnings of each person in the dataset.
-
-Students were recommended to first find some correlation between data by using free-style analysis, and then proceed to using ML models. This was included so as to show the effect of human intervention/input on the selection and performance of ML model, and also to avoid the trap of blindly applying the most costly ML model which might perform well, but is a overkill to perform task which could be completed using other less costly models. ( Cost here refers to the computation resources and time involved in training the models. )
-
-To read more about prediction of a numerical variable in R, see section \@ref(regression) and \@ref(models)
+In  prediction challenge 3, the task was to predict Earnings as a numerical variable, using any ML algorithm.
+Earnings variable is part of the Earnings dataset which is a synthetic data set relating earnings of a person to different attributes such as GPA in college, Major, as well as number of personal connections and several other attributes. 
 
 Lets look at a snippet of the Earnings dataset used for training the models below.
+
 
 ```{r,echo=FALSE}
 realestate<-read.csv("https://raw.githubusercontent.com/deeplokhande/data101demobook/main/files/dataset/Earnings_Train2021.csv") #web load
@@ -335,7 +323,6 @@ kableExtra::scroll_box(temp,width = "100%")
 
 ```
 
-We can see that there are multiple attributes like *GPA,Major,Graduation_Year,Height,etc.* that can be used as predictors, and then there is *Earnings* attribute with ideal values for each record of student which will be used while training and then will be predicted on the testing dataset.
 
 <!-- Lets look at the snippet of the earnings dataset for testing. -->
 
@@ -372,17 +359,10 @@ We can see that there are multiple attributes like *GPA,Major,Graduation_Year,He
 
 ### How the data was generated for Challenge 3
 
-In this challenge, the Earnings variable was calculated using the attributes like GPA, Connections and Graduation Year in some cases.
+The data was generated differently for different values of Education attribute - which described several classes of majors such as STEM, Humanities, Professional etc.
 
-The main attribute on which the data is subsetted is the Education attribute.
+The relationship between earnings and other attributes was generated by different formulas for different values of Education attribute as follows:
 
-Then further, there is a predetermined polynomial formula based on the various attributes. 
-
-The main idea behind these formulas, is to include a linear/ quadratic relation between the predictors and the Earnings attribute which will be predicted.
-
-These mathematical relation can be modeled using the most simplest linear regression algorithm to the most complex neural nets.
-
-The ideal formulas are listed below:
 
 ``` text
 
@@ -396,7 +376,8 @@ The ideal formulas are listed below:
                                                  0 if graduation year = odd
 ```
 
-As we can see, these formulas are mostly linear, while the formula for "other" education attribute is quadratic. Also, for "Business" education attribute subjects, the formula is dependent on an additional attribute.
+As we can see, these formulas are mostly linear, while the formula for "other" education attribute is quadratic. Also, for "Business" education attribute subjects, the formula is dependent on an additional attribute. Notice that the rule for business majors was quite tricky - making the earning formula dependent on the student’s graduation year being even or odd!
+
 
 For more detailed data analysis please view the document attached here. <button class="btn btn-primary" data-toggle="collapse" data-target="#pred3"> Pred 3 Analysis</button>
 <div id="pred3" class="collapse">    
@@ -439,9 +420,9 @@ mse(dat$Earnings,dat$predEarnings)
 
 ```
 
-We can see that after using the ideal formulas, we get an MSE of around 3300.
-Thus students who took part in this prediction challenge and scored around this MSE score would be top submissions.
+We can see that the perfect model, based on knowledge of the way data was generated, achieved  MSE of around 3300. Certainly prediction models with MSE close to 3300 would be considered very good. Again, at first quite surprisingly, there were quite a number of submissions with MSE of prediction models being far less than 3300.
 
+Explanation of how the perfect model could be so soundly beaten is “getting away” with overfitting models for the case of just single testing data set.
 ---
 
 
@@ -455,10 +436,10 @@ For this prediction challenge, the MSE score below 30000 was considered a Passin
 </div>
 
   - This was the top submission based on MSE score, with a final score less than 100.
-  - The approach to solving this challenge was really well implemented. 
-    - First, he looked at the dataset on whole, tried to find some interesting patterns.
-    - Then, after finding the patterns, he did not predict on the complete dataset using one big model, but subseted the data based on one attribute, and then modeled the ML model on these small subsets.
-  - This not only reduced the MSE to such low levels, thus increasing accuracy, but also led to faster model learning time, and prediction time.
+  - Seok’s analyzed data using plots first and quickly discovered that subsetting data based on Education is     the way to go
+  - For each subset (based on a different value of Education attribute)  he subsequently built a different       model. 
+  - In comparison to the perfect model accuracy, this MSE was over one order of magnitude smaller, just like     Nick Whelan’s solution below.  
+
   
   
 2. Nick Whelan     <button class="btn btn-primary" data-toggle="collapse" data-target="#pred32">Nick's PPT</button>
@@ -490,9 +471,11 @@ For this prediction challenge, the MSE score below 30000 was considered a Passin
     
 ## Prediction Challenge 4.
 
-Challenge 4 was a relatively newer challenge, and was built to test and combine all that has been learnt from the previous challenges.
+The challenge 4 involved “hidden” derived attributes. We have hoped that students who combined prior data inspection (plotting) with machine learning packages from R library will be able to achieve very high accuracy, certainly over 90%.  Unfortunately, none of the student solutions came even close to the perfect model accuracy, which was 92%.  Pretty much all student solutions centered around the upper 60s percentile. Even the top 3 solutions barely exceeded 68%! 
 
-In this challenge, there was a scenario as described below:
+Let us first describe the challenge and the way data was generated.
+
+**BOX ON THE BEACH CHALLENGE**
 
 *Mysterious box was found on the beach. *
 
@@ -502,20 +485,11 @@ In this challenge, there was a scenario as described below:
 
 *It has four inputs (electric) & a switch. Setting these inputs and different switch positions emits various weird and scary sounds as output in response to the electric signals. *
 
-*It sizzles, gurgles, hisses, ominously tics like a bomb,etc.....but nothing happens - just sounds. So no harm will happen to surroundings.*
+*It sizzles, gurgles, hisses, ominously tics like a bomb,etc…..but nothing happens - just sounds. So no harm will happen to surroundings.*
 
-As we can see from the scenario, the task now in this challenge, is to predict the sounds that the *Mysterios Box* will make upon providing various set of inputs and different switch positions.
+*Predict the output sound of the box based on one of the four inputs INPUTs, INPUT1,...INPUT4 (numerical values) and SWITCH which has five discrete positions.* 
 
-Henceforth, we will refer to this *mysterious* box as *Black Box*.
-
-Also, since there are only finite number of sounds the box can make, the output *sounds* attribute is a categorical value, which will be predicted in this task.
-
-Students were recommended to first find some correlation between data by using free-style analysis, and then proceed to using any ML models. 
-
-To read more about prediction in R, see sections \@ref(classification),\@ref(regression) and \@ref(models)
-
-Lets look at a snippet of the Mysterious Box/ Black Box dataset used for training the models below.
-The training describes which sounds has been noted in the laboratory in nearly 20,000 experiments combining different input signals and switch positions.
+Let's look at a snippet of the Box on the Beach dataset used for training the models below. The training describes which sounds have been noted in the laboratory in nearly 20,000 experiments combining different input signals and switch positions.
 
 ```{r,echo=FALSE}
 realestate<-read.csv("https://raw.githubusercontent.com/deeplokhande/data101demobook/main/files/dataset/BlackBoxtrainApril22.csv") #web load
@@ -528,7 +502,6 @@ kableExtra::scroll_box(temp,width = "100%")
 
 ```
 
-We can see that there are multiple attributes like *INPUT1,2,3,4 and Switch* that can be used as predictors, and then there is *Sound* attribute with ideal values for each record of the experiment record which will be used while training and then will be predicted on the testing dataset.
 
 <!-- Lets look at the snippet of the black box dataset for testing. -->
 
@@ -564,15 +537,15 @@ We can see that there are multiple attributes like *INPUT1,2,3,4 and Switch* tha
 
 ### How the data was generated for Challenge 4
 
-This challenge was the most involved of the 4 challenges in this blog. 
+The value of Sound attribute (the output sound of the box) was dependent on the four input attributes:
 
-There was no direct and straight forward answer to this challenge, but it required more data analysis, as compared to the other challenge.
+INPUT1,...INPUT4  and one of the five switch positions: Low, Minimum, Medium, Maximum and High. 
+Data was generated in two phases. In the first phase a derived attribute called OUTPUT was defined. In the second phase a simple decision tree using just OUTPUT was created which defined the output sound of the box.
 
-Although the relation of the Sound attribute was dependent on the 4 input and the switch position, figuring the relation between various inputs and the correct switch position was a non-trivial task.
+The derived attribute OUTPUT was created as different linear combinations of INPUT1...INPUT4 attributes depending on the value of SWITCH.
 
-The solution to this challenge involved creating a new numeric variable(Say "OUTPUT") which will be dependent on the 4 input values, and also the various switch positions.
+First we ordered the values of SWITCH attribute as follows:
 
-The relation between the inputs and the OUTPUT variable is given below:
 
 ``` text
 
@@ -606,9 +579,7 @@ This number list corresponds to Gargle, Tick, Beep, Kaboom, Rumble, Sizzle, Hiss
 
 ```
 
-As we can see, that the 4 Input attributes are used to calculate the OUTPUT values based on a polynomial formula, and the particular formula is choosen by the Switch attribute.
-
-After finding the OUTPUT values, then the decision tree like structure can be implemented to assign Sound attribute to corresponding OUTPUT value based on the chart above.
+The OUTPUT  variable is created by three different linear combinations of INPUT1,...INPUT4 variables   depending on different values of SWITCH attributes. Notice that the same formula is used for  “Medium”, “Maximum” and “High” positions of the SWITCH. The only two SWITCH positions which have different linear combinations of INPUT1, INPUT2, INPUT3 and INPUT4  defining OUTPUT are “Low” and “Minimum”.
 
 - **How the data was generated for Challenge 4 in R**
 
@@ -638,7 +609,14 @@ dat[dat$OUTPUT<20,]$predSound<-'Gargle'
 mean(dat$SOUND==dat$predSound)
 ```
 
----
+The accuracy of the perfect model created using the above rules, was 92%.  
+
+To our disappointment this  challenge was not a success. And this is by no means the students fault. It was our fault - since the challenge was really not fair. None of our teaching assistants was able to better the student solutions and therefore each solution had accuracy almost 25% below the accuracy of the perfect model.  In fact almost everyone’s model made the range of 65% to 68%. 
+
+Why such a huge discrepancy? Especially that for the first two challenges, students actually got away with some overfitting and even managed to beat the perfect model by a few percentage points. 
+
+We suspect that adding noise to the linear formulas defining OUTPUT for different SWITCH positions may have created problems for simple rpart() application based just on five independent variables INPUT1...INPUT4, SWITCH.  One certainly could not expect from someone who has no hints about the manner the derived attribute OUTPUT was defined, to be able to find the definition (not to mention even guess the existence of) of OUTPUT. Certainly, if OUTPUT’s definition was known, a simple rpart prediction model  using just OUTPUT would achieve accuracy exceeding 90%.
+
 
 ### Top Submissions for Challenge 4
 
