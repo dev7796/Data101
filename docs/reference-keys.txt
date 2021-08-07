@@ -109,7 +109,6 @@ randomforest
 svm
 nnet
 predblogs
-general-structure-of-the-prediction-challenges.
 prediction-challange-1.
 how-the-data-was-generated-for-challenge-1
 top-submissions-for-challenge-1.

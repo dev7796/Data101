@@ -73,7 +73,7 @@ kableExtra::scroll_box(temp,width = "100%")
 
 Professor Moody data set has been synthetically generated using random generator which follows probabilistic rules implementing "secret patterns" which we embedded in the data. 
 
-These patterns are presented below in the form of decision tree.   For example a rule that statistics major with score over 60, pass the class - reflects the generated data in which high percentage (but not 100%) of such students indeed pass Moody's class. There will always be random exceptions to these rules.  But majority of stat students with score above 60 will pass the class
+These patterns are presented below in the form of decision tree. For example a rule that statistics major with score over 60, pass the class - reflects the generated data in which high percentage (but not 100%) of such students indeed pass Moody's class. There will always be random exceptions to these rules.  But majority of stat students with score above 60 will pass the class
 
 The data is based on a tree given by the following conditions:
 
