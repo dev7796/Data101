@@ -19,42 +19,7 @@ If the accuracy of a prediction model is near the accuracy of a perfect predicti
 
 ---
 
-## General Structure of the Prediction Challenges.
-
-Usually there is a task to be performed in each prediction challenge. 
-
-Either predicting a numerical of categorical values is the task of each challenge.
-
-The way to perform those task are constrained differently for different prediction challenges based on levels of difficulty and ML models to be used.
-
-The submission will take place on **Kaggle** which is used for organizing these prediction challenges online, helping in validating submissions, placing deadlines for submission and also calculating the prediction scores along with ranking all the submission.
-
-The datasets provided for each prediction challenge is as follows:
-
-1. Training Dataset.
-    - It is used for training and cross-validation purpose in the prediction challenge. 
-    - This data has all the training attributes along and the ideal values of the prediction attribute.
-    - Models for prediction are to be trained using this dataset only.
-2. Testing Dataset.
-    - It is used for prediction only.
-    - It consists of all the attributes that were used for training, but it does not contain any values of the actual prediction attributes, which is actually the attribute that the prediction challenge predicts.
-    - Since its only used for prediction purpose and is not involved in training of the models, it is thus not involved in the cross-validation phase too.
-3. Submission Dataset.
-    - After prediction using the "testing" dataset, for submitting on Kaggle, we must copy the predicted attribute column to this Submission Dataset which only has 2 columns, first an index column(e.g. ID or name,etc) and second the predicted attribute column.
-    - Remember after copying the predicted attribute column to this dataset, one should also save this dataset into the same submission dataset file, which then can be used to upload on Kaggle.
-
-- To read the datasets use the *read.csv()* function and for writing the dataset to the file, use the *write.csv()* function.
-  - Offen times while writing the dataframe from R to a csv file, people make mistake of writing even the row names, which results in error upon submission of this file to Kaggle.
-  - To avoid this, you can add the parameter, `row.names = F` in the `write.csv()` function. e.g. `write.csv(*dataframe*,*fileaddress*,row.names = F)`.
-
-Now lets look at the prediction challenges that took place in this course along with the top submissions by students.
-
----
-
-
 ## Prediction Challange 1.
-
-In Prediction challange 1, the task was to predict a categorical value using *only free-style* prediction. 
 
 For this prediction challenge we used our favorite dataset, the Moody dataset, and predicted the Grade category of all students. The Grade category had only 2 factors: *Pass* OR *Fail*.
 
@@ -71,7 +36,6 @@ kableExtra::scroll_box(temp,width = "100%")
 
 ```
 
-We can see that there are multiple attributes like *Score, Attendence, Major, etc.* that can be used as predictors, and then there is *Grade* attribute with ideal values for each record of student which will be used while training and then will be predicted on the testing dataset.
 
 <!-- Lets look at the snippet of the moody dataset for testing. -->
 
@@ -109,7 +73,7 @@ We can see that there are multiple attributes like *Score, Attendence, Major, et
 
 Professor Moody data set has been synthetically generated using random generator which follows probabilistic rules implementing "secret patterns" which we embedded in the data. 
 
-These patterns  are presented below in the form of decision tree.   For example a rule that statistics major with score over 60, pass the class - reflects the generated data in which high percentage (but not 100%) of such students indeed pass Moody's class. There will always be random exceptions to these rules.  But majority of stat students with score above 60 will pass the class
+These patterns are presented below in the form of decision tree.   For example a rule that statistics major with score over 60, pass the class - reflects the generated data in which high percentage (but not 100%) of such students indeed pass Moody's class. There will always be random exceptions to these rules.  But majority of stat students with score above 60 will pass the class
 
 The data is based on a tree given by the following conditions:
 
@@ -207,7 +171,14 @@ answers<-read.csv("https://raw.githubusercontent.com/deeplokhande/data101demoboo
 mean(dat$Grade==answers$Grade) # Accuracy
 ```
 
-Thus we can see, using the ideal patterns the students would have expected to score around 83% accuracy.
+Accuracy of the perfect prediction model defined above was around 83% on the testing data set. 
+
+In the next section we review some top student submissions. Surprisingly all top 10 student solutions achieve accuracy beating the ideal 83% accuracy by a solid few percentage points. In other words, these students do better than the prediction model which is fully aware of the rules used in data generation!  How is this possible?
+
+There may be several reasons for this. First,the synthetically  generated data satisfies some spurious, random patterns, in addition to the patterns built into the data generation process. The smaller the generated data set, the more likely these spurious patterns are.  Perfect prediction model will not incorporate these spurious patterns. Prediction models built by students on the basis of the training data set may take advantage of these spurious patterns. Summarizing, the actual data set has some additional noise, and some random patterns which are generated as unintended side effects of our generation procedure. The larger our generated data sets are, the less prominent these spurious patterns are.  Typically our data sets have a few thousand tuples. This is not large enough to combat the law of small numbers - some extreme patterns appearing randomly. 
+
+Another reason could be getting away with overfitting - since even though we have used testing data which is different from training data, we only tested the student prediction models once, against one specific test data set. The students' models may have overfit the training data and testing data as well (since only one testing data set was used). If we tested against multiple testing data sets, this overfitting effect may have vanished. 
+
 
 ---
 
