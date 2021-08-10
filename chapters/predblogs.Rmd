@@ -426,7 +426,6 @@ mse(dat$Earnings,dat$predEarnings)
 ```
 
 We can see that the perfect model, based on knowledge of the way data was generated, achieved  MSE of around 3300. Certainly prediction models with MSE close to 3300 would be considered very good. Again, at first quite surprisingly, there were quite a number of submissions with MSE of prediction models being far less than 3300.
-Explanation of how the perfect model could be so soundly beaten is “getting away” with overfitting models for the case of just single testing data set.
 
 ---
 
