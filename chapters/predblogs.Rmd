@@ -223,7 +223,7 @@ With rpart() doing most work of prediction in this task, the students were also 
 
 In general, rpart() offered great help to the vast majority of students. In fact around 70% of all students achieved identical accuracy on the testing data set, which was a few points shy of the ideal 83%. This was the case because  they used the same prediction model - a simple default rpart model. Interestingly rpart()  accuracy did not  beat the few top prediction model solutions for challenge 1. These were coded manually without using any R libraries. In fact nobody has beat the top accuracy achieved for the prediction challenge 1 by Jeremy Prasad!  However he spent a lot of time building his prediction model from the ground. And got away with some overfitting for sure.
 
-To perform this challenge yourself please visit the kaggle site of this prediction challenge. Link to Kaggle Site: Prediction Challenge 2
+To perform this challenge yourself please visit the kaggle site of this prediction challenge. Link to Kaggle Site: [Prediction Challenge 2](https://www.kaggle.com/t/607a8221c6a647048f88ffa380ad1e4b){target="_blank"}
 
 <!-- To perform this challenge yourself please visit the kaggle site of this prediction challenge. Link to Kaggle Site: [Prediction Challenge 2](https://www.kaggle.com/t/607a8221c6a647048f88ffa380ad1e4b){target="_blank"} -->
 
@@ -259,6 +259,11 @@ To perform this challenge yourself please visit the kaggle site of this predicti
 <!-- - As we can see, the prediction accuracy is near 83%, using just the simple rpart model without any control parameters. -->
 <!--   - Students can use the control parameters for creating decision tree with more accuracy. -->
 <!-- - **Note**, that the decision tree generated using the rpart() function will be different than that of the ideal trees shown in prediction challenge 1. -->
+---
+
+### How the data was generated to Challenge 2
+
+As we saw that the prediction task and the datasets in challenge 2 are similar to that of the challenge 1. Thus the data analysis of the challenge 1 would applicable in this case too
 
 ---
 
@@ -421,8 +426,8 @@ mse(dat$Earnings,dat$predEarnings)
 ```
 
 We can see that the perfect model, based on knowledge of the way data was generated, achieved  MSE of around 3300. Certainly prediction models with MSE close to 3300 would be considered very good. Again, at first quite surprisingly, there were quite a number of submissions with MSE of prediction models being far less than 3300.
-
 Explanation of how the perfect model could be so soundly beaten is “getting away” with overfitting models for the case of just single testing data set.
+
 ---
 
 
